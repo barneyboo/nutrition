@@ -1,0 +1,74 @@
+,Unnamed: 0,id,name,genre,keywords,exclude?,group,lowerDownloads,upperDownloads,rating,total_ratings,last_updated,weighted_rating,reviewer,second
+33,411,com.popularapp.periodcalendar,"Period Tracker, My Calendar",Health & Fitness,[mood],,mood,50000000,100000000,4.740021229,3624644,19/09/2016,17180889.51,Luke,Ciaran
+4,123,com.myfitnesspal.android,Calorie Counter - MyFitnessPal,Health & Fitness,"[weight, diet]",,diet,50000000,100000000,4.61275816,1411645,20/10/2016,6511576.993,Luke,
+44,220,com.runtastic.android,Runtastic Running & Fitness,Health & Fitness,"[running, running, exercise, workouts]",,running,10000000,50000000,4.495227337,627943,19/10/2016,2822746.54,Blaine,Ciaran
+45,138,com.nike.plusgps,Nike+ Run Club,Health & Fitness,"[running, running]",,running,10000000,50000000,4.373317719,512459,15/09/2016,2241146.025,Arosha,Blaine
+46,230,com.fitnesskeeper.runkeeper.pro,RunKeeper - GPS Track Run Walk,Health & Fitness,"[walking, running, running]",,running,10000000,50000000,4.452026844,427885,24/10/2016,1904955.506,Arosha,Blaine
+47,226,com.endomondo.android,Endomondo - Running & Walking,Health & Fitness,"[walking, running, exercise, workouts, cycling]",,running,10000000,50000000,4.454059124,379910,21/10/2016,1692141.602,Arosha,
+18,213,si.modula.android.instantheartrate,Instant Heart Rate Monitor,Health & Fitness,"[heartrate, heart rate]",,heart,10000000,50000000,4.271670341,273012,19/10/2016,1166217.263,Ciaran,Blaine
+121,169,cc.pacer.androidapp,Pedometer & Weight Loss Coach,Health & Fitness,"[weight, steps, walking]",,weight,10000000,50000000,4.516668797,253677,27/09/2016,1145774.99,Blaine,
+55,287,com.urbandroid.sleep,Sleep as Android,Lifestyle,"[sleep, sleep]",,sleep,10000000,50000000,4.303458691,223056,06/08/2016,959912.2818,Blaine,
+48,90,com.strava,Strava Running and Cycling GPS,Health & Fitness,"[running, running, cycling]",,running,5000000,10000000,4.524771214,200352,24/10/2016,906546.9623,Ciaran,
+56,78,droom.sleepIfUCan,Alarmy (Sleep If U Can)- alarm,Lifestyle,"[sleep, sleep]",,sleep,1000000,5000000,4.706886292,182175,24/10/2016,857477.0102,Blaine,
+86,94,com.tayu.tau.pedometer,Pedometer,Health & Fitness,"[steps, walking]",,steps,10000000,50000000,4.322688103,197587,25/10/2016,854106.9742,Arosha,Ciaran
+14,227,com.fitbit.FitbitMobile,Fitbit,Health & Fitness,"[steps, exercise, workouts]",,hardware,10000000,50000000,3.95070076,208624,20/10/2016,824210.9954,Luke,Blaine
+87,154,com.sec.android.app.shealth,S Health,Health & Fitness,"[steps, heart rate]",,steps,100000000,500000000,4.136077881,195065,20/10/2016,806804.0319,Ciaran,Luke
+64,340,com.kpmoney.android,AndroMoney ( Expense Track ),Finance,"[spending, income]",,spending,1000000,5000000,4.716093063,169802,23/10/2016,800802.0343,Arosha,Luke
+88,143,com.google.android.apps.fitness,Google Fit - Fitness Tracking,Health & Fitness,"[steps, walking, exercise, workouts]",,steps,10000000,50000000,3.963454723,202024,02/09/2016,800712.977,Luke,
+49,309,com.stt.android,Sports Tracker Running Cycling,Health & Fitness,"[exercise, workouts, cycling]",,running,5000000,10000000,4.476275444,160151,12/10/2016,716879.9886,Arosha,
+89,244,com.sonymobile.lifelog,Lifelog,Health & Fitness,[steps],,steps,10000000,50000000,4.101710796,160199,18/10/2016,657089.9678,Ciaran,Arosha
+19,206,com.runtastic.android.heartrate.lite,Runtastic Heart Rate Monitor,Health & Fitness,"[heartrate, heart rate]",,heart,5000000,10000000,4.335975647,146585,12/10/2016,635588.9902,Luke,
+50,408,com.mapmyrun.android2,Run with Map My Run,Health & Fitness,"[running, running]",,running,5000000,10000000,4.50052309,135787,07/10/2016,611112.5288,Ciaran,
+90,196,com.noom.walk,Noom Walk Pedometer,Health & Fitness,"[steps, walking]",,steps,10000000,50000000,4.068927288,147025,13/06/2016,598234.0345,Blaine,
+122,137,com.dietcoacher.sos,My Diet Coach - Weight Loss,Health & Fitness,"[weight, diet]",,weight,10000000,50000000,4.337255001,125549,23/03/2016,544538.0281,Arosha,
+34,71,co.thefabulous.app,Fabulous - Motivate Me!,Health & Fitness,[happiness],,mood,1000000,5000000,4.615641594,106856,22/10/2016,493208.9982,Ciaran,
+123,118,tools.bmirechner,BMI Calculator & Weight Loss,Health & Fitness,[weight],,weight,10000000,50000000,3.983629465,121072,27/09/2016,482305.9866,Ciaran,
+102,92,com.todoist,"Todoist: To-Do List, Task List",Productivity,[time keeping],,time,10000000,50000000,4.423021793,107933,21/09/2016,477390.0112,Blaine,
+124,291,com.weightwatchers.mobile,Weight Watchers Mobile,Health & Fitness,"[weight, eating]",,weight,5000000,10000000,3.800359726,110651,24/10/2016,420513.604,Blaine,
+91,351,com.mapmywalk.android2,Walk with Map My Walk,Health & Fitness,[walking],,steps,1000000,5000000,4.441078663,91844,07/10/2016,407886.4287,Luke,Arosha
+0,440,com.runtastic.android.roadbike.lite,Runtastic Road Bike GPS App,Health & Fitness,[cycling],,cycling,1000000,5000000,4.467065334,86748,01/03/2016,387508.9836,Luke,
+65,319,com.bookmark.money,Money Lover - Money Manager,Finance,[spending],,spending,1000000,5000000,4.451261997,86414,24/10/2016,384651.3542,Luke,
+66,81,com.lib.cwmoney,CWMoney 2.21 Expense Track,Finance,[spending],,spending,1000000,5000000,4.67929697,82053,19/10/2016,383950.3543,Arosha,
+57,150,com.runtastic.android.sleepbetter.lite,Sleep Better with Runtastic,Health & Fitness,"[sleep, sleep]",,sleep,1000000,5000000,4.079649448,92455,01/08/2016,377183.9897,Arosha,
+92,292,com.runtastic.android.pedometer.lite,Runtastic Pedometer Step Count,Health & Fitness,[steps],,steps,5000000,10000000,4.160384178,90514,26/05/2015,376573.0135,Arosha,
+125,259,monitoryourweight.bustan.net,Monitor Your Weight,Health & Fitness,[weight],,weight,5000000,10000000,4.358203888,80443,19/10/2016,350586.9954,Ciaran,
+1,46,com.mapmyride.android2,Map My Ride GPS Cycling Riding,Health & Fitness,[cycling],,cycling,1000000,5000000,4.430294037,78539,07/10/2016,347950.8634,Arosha,
+5,142,com.sillens.shapeupclub,Lifesum - The Health Movement,Health & Fitness,[diet],,diet,5000000,10000000,4.282561779,65529,30/09/2016,280631.9908,Ciaran,
+67,134,com.monefy.app.lite,Monefy - Money Manager,Finance,[spending],,spending,1000000,5000000,4.542339325,60960,18/07/2016,276901.0053,Luke,
+68,225,com.realbyteapps.moneymanagerfree,Money Manager Expense & Budget,Finance,[spending],,spending,1000000,5000000,4.504457951,55180,18/10/2016,248555.9897,Blaine,
+6,239,com.fitnow.loseit,Lose it!,Health & Fitness,"[eating, diet]",,diet,5000000,10000000,4.37560606,55268,30/09/2016,241830.9957,Luke,
+69,207,com.expensemanager,Expense Manager,Finance,[spending],,spending,1000000,5000000,4.320051193,52536,12/08/2016,226958.2095,Arosha,
+70,307,com.droid4you.application.wallet,Wallet - Budget Tracker,Finance,[spending],,spending,1000000,5000000,4.455467224,39645,23/10/2016,176636.9981,Ciaran,
+103,119,com.gmail.jmartindev.timetune,TimeTune - Conquer Your Time,Productivity,[time keeping],,time,1000000,5000000,4.612754345,28398,16/09/2016,130992.9979,Ciaran,
+58,322,com.northcube.sleepcycle,Sleep Cycle alarm clock,Health & Fitness,"[sleep, sleep]",,sleep,500000,1000000,4.499268532,26663,23/10/2015,119963.9969,Luke,
+7,67,com.yazio.android,Calorie Counter & Diet Tracker,Health & Fitness,[diet],,diet,1000000,5000000,4.532596111,26138,29/09/2016,118472.9971,Blaine,Luke
+59,22,com.azumio.android.sleeptime,Sleep Time Smart Alarm Clock,Health & Fitness,[sleep],,sleep,1000000,5000000,4.079797745,27670,03/10/2016,112888.0036,Luke,
+126,109,de.aktiwir.aktibmi,Weight Log & BMI Calculator,Health & Fitness,[weight],,weight,1000000,5000000,4.501528263,22902,26/08/2016,103094.0003,Luke,
+35,341,net.daylio,Diary - Mood Tracker,Lifestyle,[mood],,mood,100000,500000,4.649343491,21397,16/10/2016,99482.00268,Luke,
+8,140,com.sparkpeople.androidtracker,Calorie Counter & Diet Tracker,Health & Fitness,[diet],,diet,1000000,5000000,4.411946297,22049,08/09/2016,97279.0039,Blaine,Arosha
+104,404,com.dynamicg.timerecording,Time Recording - Timesheet App,Productivity,"[timekeeping, time keeping]",,time,1000000,5000000,4.547834873,20991,23/09/2016,95463.60182,Luke,
+105,395,com.intuit.quickbooks,QuickBooks Accounting+Invoice,Business,[timekeeping],,time,1000000,5000000,4.294495106,16367,17/10/2016,70288.0014,Arosha,
+127,189,jp.co.recruit.mtl.beslim,Weight Loss Tracker - RecStyle,Health & Fitness,[body fat],,weight,1000000,5000000,4.34793663,16092,11/07/2016,69966.99625,Ciaran,
+20,79,com.azumio.instantheartrate.full,Instant Heart Rate Monitor Pro,Health & Fitness,"[heartrate, heart rate]",,heart,100000,500000,4.328206062,15798,19/10/2016,68376.99937,Arosha,
+106,442,com.aadhk.time,Timesheet,Business,[time keeping],,time,500000,1000000,4.417992115,14651,06/09/2016,64728.00248,Blaine,
+15,26,fi.polar.polarflow,Polar Flow - Activity & Sports,Health & Fitness,"[exercise, workouts]",,hardware,1000000,5000000,2.995653868,19097,17/10/2016,57208.00192,Luke,
+107,147,arproductions.andrew.worklog,Work Log,Productivity,[timekeeping],,time,500000,1000000,4.526714325,12540,29/08/2016,56764.99764,Arosha,
+21,245,com.heartrate.monitor,Heart Rate Monitor,Health & Fitness,"[heartrate, heart rate]",,heart,1000000,5000000,3.585238695,14958,16/08/2016,53628.0004,Blaine,
+22,197,com.supersimpleapps.heart_rate_monitor_newui,Unique Heart Rate Monitor,Health & Fitness,"[heartrate, heart rate]",,heart,1000000,5000000,4.430966854,10198,04/02/2016,45186.99998,Blaine,
+23,299,com.dungelin.heartrate,Heart Rate Monitor & Tracker,Health & Fitness,"[heartrate, heart rate]",,heart,500000,1000000,4.244639874,9561,08/10/2016,40583.00184,Ciaran,
+108,136,com.rauscha.apps.timesheet,Timesheet - Time Tracker,Productivity,[time keeping],,time,500000,1000000,4.455225468,8956,03/06/2016,39900.99929,Arosha,
+24,61,comm.cchong.BloodAssistant,iCare Health Monitor (BP & HR),Health & Fitness,"[heartrate, heart rate]",,heart,500000,1000000,4.428992271,8830,22/10/2016,39108.00175,Blaine,
+60,127,com.madinsweden.sleeptalk,Sleep Talk Recorder,Lifestyle,[sleep],,sleep,1000000,5000000,3.399535656,11198,25/06/2015,38068.00028,Luke,
+36,177,com.soh,Secret Of Happiness,Health & Fitness,[happiness],,mood,100000,500000,4.329638004,6495,03/02/2015,28120.99884,Ciaran,
+9,383,com.abma.dietplan,Diet Plan,Health & Fitness,[diet],,diet,100000,500000,4.016540527,6348,10/02/2015,25496.99927,Ciaran,
+10,24,com.livestrong.tracker,MyPlate Calorie Tracker,Health & Fitness,[eating],,diet,100000,500000,4.470141411,5660,23/08/2016,25301.00039,Ciaran,
+37,378,com.bliss.phonegap,Gratitude Journal,Productivity,[happiness],,mood,100000,500000,4.622894287,2909,14/06/2016,13447.99948,Ciaran,
+61,235,com.ihandysoft.alarmclockpro,Alarm Clock Pro,Tools,[sleep],,sleep,50000,100000,3.86980176,2577,28/09/2016,9972.479136,Blaine,
+38,263,com.moodtools.moodtools,MoodTools - Depression Aid,Medical,[mood],,mood,100000,500000,4.315261841,2195,16/07/2016,9471.999741,Luke,
+39,110,com.moodtrak.diary,Moodtrack Diary: Mood Tracker,Lifestyle,[mood],,mood,50000,100000,4.203898907,1898,11/09/2015,7979.000125,Luke,
+2,401,com.matixsoft.velopal,VeloPal  GPS Cycling,Health & Fitness,[cycling],,cycling,10000,50000,4.062034607,403,18/07/2016,1636.999947,Arosha,
+12,166,de.aktiwir.aktifit,Simple Workout Log - aktiFit,Health & Fitness,"[exercise, workouts]",,exercise,10000,50000,4.415019989,253,01/08/2016,1117.000057,Luke,
+3,1,com.sportsapps.indoor.cycling,Indoor Cycling,Sports,[cycling],,cycling,10000,50000,4.151111126,225,04/10/2015,934.0000034,Arosha,
+13,264,com.biostatusfit.www,Fitness Tracker,Health & Fitness,"[exercise, workouts]",,exercise,1000,5000,3.950000048,20,24/04/2016,79.00000096,Blaine,
+16,,com.xiaomi.hm.health,Mi Fit,Health & Fitness,[hardware],,hardware,,,,,,,Ciaran,
+17,,com.jawbone.upopen,UP - Smart Coach for Health,Health & Fitness,[hardware],,hardware,,,,,,,Ciaran,

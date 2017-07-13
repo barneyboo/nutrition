@@ -1,0 +1,32 @@
+{% extends "store/store_base.html" %}
+
+{% block content %}
+
+<h1 class="display-4">Welcome to the self-improvement app store</h1>
+<p class="lead">Browse by category to search what you're looking for</p>
+
+<hr>
+
+<h2>Featured apps</h2>
+
+<!--<div class="card-deck">-->
+<div class="row">
+  <div class="card-deck">
+  {% for app in apps %}
+
+  <div class="card">
+  <a href="app?id={{ app.id }}">
+      <img class="card-img-top mx-auto" src="{{app.icon_url}}" style="width:50%" alt="{{ app.name }}">
+  </a>
+    <div class="card-block">
+      <h4 class="card-title"><a href="app?id={{ app.id }}">{{ app.name }}</a></h4>
+      <p class="card-text">{{ app.short_description }}</p>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+</div>
+<!--</div>-->
+
+{% endblock %}

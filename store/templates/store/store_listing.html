@@ -1,0 +1,418 @@
+{% extends "store/store_base.html" %}
+
+{% block scripts %}
+<script type="text/javascript" src="/static/store/js/raphael.js"></script>
+<script type="text/javascript" src="/static/store/js/treemap.js"></script>
+
+<script type="text/javascript">
+var h = $('.app_desc')[0].scrollHeight;
+
+
+$('.read-more').click(function(e) {
+  e.stopPropagation();
+  $('.app_desc').animate({
+      'height': h
+  })
+});
+
+$(document).click(function() {
+  $('.app_desc').animate({
+      'height': '200px'
+  })
+})
+
+$('body').on('click', 'p.click-show', function() {
+//$(".click-show").click(function () {
+    $(this).text("CLICK TO HIDE");
+    $(this).parent().parent().next(".expand-list").slideDown();
+    $(this).removeClass("click-show")
+    $(this).addClass("click-hide");
+});
+
+$('body').on('click', 'p.click-hide', function() {
+//$(".click-hide").click(function () {
+    $(this).text("CLICK TO SHOW");
+    $(this).parent().parent().next(".expand-list").slideUp();
+    $(this).removeClass("click-hide")
+    $(this).addClass("click-show");
+});
+
+$('body').on('click','.confirm-install', function() {
+    $.ajax({
+      url:'postInstall',
+      data:{'app':{{ app.id }} }
+    })
+    .done(function(data) {
+      window.location.replace("postBrief");
+    })
+
+});
+
+var app_scores = {{ app_scores|safe }};
+var max_scores = {{ max_scores|safe }};
+
+var boxFormatter = function (coordinates, index) {
+        	// so in this case an index of [1,1] would refer to "London" and [2,1] to "Berlin"
+        	// coordinates are in the form [x1,y1,x2,y2]
+
+            var cats = ["social","consent","access","notice"]
+            //max_scores = {'social':10,'consent':19,'access':9,'notice':16}
+
+
+            var datapoint = app_scores[cats[index]]
+
+            //var saturation = ((datapoint / max_scores[cats[index]])*0.6) + 0.4;
+            //var brightness = ((datapoint / max_scores[cats[index]])*0.3) + 0.2;
+            if(max_scores[cats[index]] > 0) {
+              var hue = 0.33*((datapoint / max_scores[cats[index]]))
+              var bright = 0.78
+            }
+            else {
+              var hue = 0
+              var bright = 0
+              $(".list-"+cats[index]+",.expand-"+cats[index]).hide(); // don't recommend apps in this cat if it doesn't apply
+            }
+            color = "hsb(" + hue + ",0.85," + bright +")";
+
+            return{ "fill" : color,'stroke' : '#eee', 'stroke-width' : '3.5px'};
+        };
+
+var drawing;
+var cats = ["social","consent","access","notice"];
+
+var boxFormatterDark = function (coordinates, index) {
+
+            //max_scores = {'social':10,'consent':19,'access':9,'notice':16}
+
+
+            var datapoint = app_scores[cats[index]]
+            //var saturation = ((datapoint / max_scores[cats[index]])*0.6) + 0.4;
+            //var brightness = ((datapoint / max_scores[cats[index]])*0.3) + 0.2;
+            if(max_scores[cats[index]] > 0) {
+              var hue = 0.33*((datapoint / max_scores[cats[index]]))
+              var bright = 0.78
+            }
+            else {
+              var hue = 0
+              var bright = 0
+              $(".list-"+cats[index]+",.expand-"+cats[index]).hide(); // don't recommend apps in this cat if it doesn't apply
+            }
+            color = "hsb(" + hue + ",0.85," + bright +")";
+            if(cats[index] != drawing)
+              color = "#6e6e6e";
+
+            return{ "fill" : color,'stroke' : '#1a1a1a', 'stroke-width' : '3.5px'};
+        };
+
+$(".what_mean").hover(function() {
+  $("tspan").animate({
+    opacity: 1},
+    500,function() {})
+},
+  function() {
+    $("tspan").animate({
+      opacity: 0},
+      500,function() {})
+});
+
+$(document).ready(function () {
+  $('[data-toggle="popover"]').popover({html:true})
+
+  data = {{ concerns|safe }}
+  labels = ["S","C","A","N"]
+  Treemap.draw("privacy-matrix",70,70,data,labels,
+  { 'background' : {'fill': '#eee','stroke':'#eee'},
+    'label' : {'fill' : '#eee'},
+    'box': boxFormatter})
+
+
+    for(var cat in cats) {
+      drawing = cats[cat];
+      if ($("#privacy-matrix-"+drawing).length > 0) {
+        Treemap.draw("privacy-matrix-"+drawing,70,70,data,labels,
+        { 'background' : {'fill': '#1a1a1a','stroke':'#0f0f0f'},
+          'label' : {'fill' : '#cecece'},
+          'box': boxFormatterDark})
+      }
+    }
+
+  $(".expand-list").hide();
+});
+
+
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-2"><img class="img-fluid" src="{{ app.icon_url }}"></div>
+      <div class="col-7">
+        <h1>{{ app.name}}</h1>
+        <h4>{{ app.category.name}}</h1>
+      </div>
+      {% if do_install %}
+        <div class="col-sm">
+          <a class="btn btn-success btn-lg install-app" href="#" role="button" data-toggle="modal" data-target="#confirm-app">Install this app</a>
+        </div>
+      {% endif %}
+    </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="{{ app.screenshot }}" alt="Screenshot of {{ app.name }}">
+          </div>
+        </div>
+
+        <div class="col-9">
+            <div class="app_desc">
+              {{ app.description_dom|safe}}
+            </div>
+        <div class="read-more">
+          <div class="readmore-link">READ MORE</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+  <div class="col-lg-4 privacy-sidebar">
+    <div class="row matrix-cont">
+      <div class="col-3">
+        <h6 style="padding:0;font-size: 0.7em;font-weight: bold;">Your SCAN label</h6>
+        <div id="privacy-matrix">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <!-- <h4>This app might have
+        privacy problems</h4> -->
+        <h4 class="story_{{story.0}}"> {{ story.1 }}</h4>
+        <span data-toggle="popover" title="Understanding the <b>SCAN</b> label" data-placement="bottom" data-trigger="hover" data-content="This label shows how important these four privacy issues are to you, and how well this app respects them:<ul><li><b>Social</b>: Can you control how information is shared with your friends?</li><li><b>Consent</b>: Are you asked for permission before your data are used?</li><li><b>Access</b>: Are you able to access and export your own data?</li><li><b>Notice</b>: Does this app tell you how your data are used before it is collected?</li></ul><p>The bigger the symbol, the more the corresponding issue matters to you. The closer to green, the more the app respects this issue, whereas the closer to red, the worse it is. A black symbol means this issue does not apply to this app.</p><p>Using this label, you can see at a glance if this app is right for you.</p>"><small class="what_mean">What does this mean?</small></span>
+      </div>
+    </div>
+
+    {% for concern in sorted_rank %}
+        {% if concern.0 == "social" %}
+            {% if better.social|length > 0 %}
+            <div class="row score-expand expand-social">
+              <div class="col-3">
+                <div id="privacy-matrix-social">
+                </div>
+              </div>
+
+              <div class="col-9">
+                <p>There {{ better.social|length|pluralize:"is,are" }} {{ better.social|length }} app{{ better.social|length|pluralize:",s" }} which give{{ better.social|length|pluralize:"s," }} you more control over how you share data with your friends</p>
+                <p class="expand-score click-show">CLICK TO SHOW</p>
+              </div>
+            </div>
+
+            <div class="row expand-list list-social">
+              {% for app in better.social %}
+                {% if forloop.counter0 > 0 %}<hr>{% endif %}
+                <div class="row">
+                  <div class="col-3">
+                        <div class="suggest-placeholder"><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"><img class="img-fluid" src="{{ app.icon_url }}"></a></div>
+                  </div>
+                  <div class="col">
+                        <h4> <a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}">{{ app.name }}</a></h4>
+                        <div class="suggest-metric">
+                          <b><span class="better-perform">&#9650;</span> Better</b> social sharing controls</span>
+                        </div>
+                          {% for cat, apps in worse.items %}
+
+                          <div class="suggest-metric">
+                            {% if app in apps %}
+                                <b><span class="worse-perform">&#9660;</span> Worse</b>
+                                  {% if cat == "consent" %} at getting your consent {% endif %}
+                                  {% if cat == "access" %}  at providing access to data {% endif %}
+                                  {% if cat == "notice" %} at explaining how your data are used{% endif %}
+                                  </span>
+                            {% endif %}
+                          </div>
+                          {% endfor %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+              </div>
+          {% endif %}
+        {% endif %}
+
+        {% if concern.0 == "consent" %}
+          {% if better.consent|length > 0 %}
+        <div class="row score-expand expand-consent">
+          <div class="col-3">
+            <div id="privacy-matrix-consent">
+            </div>
+          </div>
+
+          <div class="col-9">
+            <p>There {{ better.consent|length|pluralize:"is,are" }} {{ better.consent|length }} app{{ better.consent|length|pluralize:",s" }} which {{ better.consent|length|pluralize:"is,are" }} better at asking permission before collecting your data.</p>
+            <p class="expand-score click-show">CLICK TO SHOW</p>
+          </div>
+          </div>
+
+          <div class="row expand-list list-consent">
+            {% for app in better.consent %}
+              {% if forloop.counter0 > 0 %}<hr>{% endif %}
+              <div class="row">
+                <div class="col-3">
+                      <div class="suggest-placeholder"><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"><img class="img-fluid" src="{{ app.icon_url }}"></a></div>
+                </div>
+                <div class="col">
+                      <h4><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"> {{ app.name }}</a></h4>
+                      <div class="suggest-metric">
+                        <b><span class="better-perform">&#9650;</span> Better</b> at getting your consent
+                      </div>
+                        {% for cat, apps in worse.items %}
+
+                        <div class="suggest-metric">
+                          {% if app in apps %}
+                              <b><span class="worse-perform">&#9660;</span> Worse</b>
+                                {% if cat == "social" %} social sharing controls {% endif %}
+                                {% if cat == "access" %}  at providing access to data {% endif %}
+                                {% if cat == "notice" %} at explaining how your data are used{% endif %}
+                                </span>
+                          {% endif %}
+                        </div>
+                        {% endfor %}
+                      </div>
+                  </div>
+              {% endfor %}
+
+        </div>
+          {% endif %}
+        {% endif %}
+
+        {% if concern.0 == "access" %}
+          {% if better.access|length > 0 %}
+            <div class="row score-expand expand-access">
+              <div class="col-3">
+                <div id="privacy-matrix-access">
+                </div>
+              </div>
+
+              <div class="col-9">
+                <p>There {{ better.access|length|pluralize:"is,are" }} {{ better.access|length }} app{{ better.access|length|pluralize:",s" }} which give{{ better.access|length|pluralize:"s," }} you more access to your data.</p>
+                <p class="expand-score click-show">CLICK TO SHOW</p>
+              </div>
+              </div>
+
+              <div class="row expand-list list-access">
+                {% for app in better.access %}
+                  {% if forloop.counter0 > 0 %}<hr>{% endif %}
+                  <div class="row">
+                    <div class="col-3">
+                          <div class="suggest-placeholder"><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"><img class="img-fluid" src="{{ app.icon_url }}"></a></div>
+                    </div>
+                    <div class="col">
+                          <h4> <a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"> {{ app.name }}</a></h4>
+                          <div class="suggest-metric">
+                            <b><span class="better-perform">&#9650;</span> Better</b> at providing access to your data
+                          </div>
+                            {% for cat, apps in worse.items %}
+
+                            <div class="suggest-metric">
+                              {% if app in apps %}
+                                  <b><span class="worse-perform">&#9660;</span> Worse</b>
+                                    {% if cat == "social" %} social sharing controls {% endif %}
+                                    {% if cat == "consent" %} at getting your consent {% endif %}
+                                    {% if cat == "notice" %} at explaining how your data are used{% endif %}
+                                    </span>
+                              {% endif %}
+                            </div>
+                            {% endfor %}
+                          </div>
+                      </div>
+                  {% endfor %}
+                </div>
+
+
+          {% endif %}
+        {% endif %}
+
+        {% if concern.0 == "notice" %}
+          {% if better.notice|length > 0 %}
+            <div class="row score-expand expand-notice">
+              <div class="col-3">
+                <div id="privacy-matrix-notice">
+                </div>
+              </div>
+
+              <div class="col-9">
+                <p>There {{ better.notice|length|pluralize:"is,are" }} {{ better.notice|length }} app{{ better.notice|length|pluralize:",s" }} which give{{ better.notice|length|pluralize:"s," }} you more information about how {{ better.notice|length|pluralize:"it,they" }} work{{ better.notice|length|pluralize:"s," }} before you start using {{ better.notice|length|pluralize:"it,them" }}.</p>
+                <p class="expand-score click-show">CLICK TO SHOW</p>
+              </div>
+            </div>
+
+            <div class="row expand-list list-notice">
+              {% for app in better.notice %}
+                {% if forloop.counter0 > 0 %}<hr>{% endif %}
+                <div class="row">
+                  <div class="col-3">
+                        <div class="suggest-placeholder"><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"><img class="img-fluid" src="{{ app.icon_url }}"></a></div>
+                  </div>
+                  <div class="col">
+                        <h4><a href="app?id={{ app.id }}{% if not do_install %}&ro=1{% endif %}"> {{ app.name }} </a></h4>
+                        <div class="suggest-metric">
+                          <b><span class="better-perform">&#9650;</span> Better</b> at explaining how your data are used
+                        </div>
+                          {% for cat, apps in worse.items %}
+
+                          <div class="suggest-metric">
+                            {% if app in apps %}
+                                <b><span class="worse-perform">&#9660;</span> Worse</b>
+                                  {% if cat == "social" %} social sharing controls {% endif %}
+                                  {% if cat == "consent" %} at getting your consent {% endif %}
+                                  {% if cat == "access" %} at providing access to data{% endif %}
+                                  </span>
+                            {% endif %}
+                          </div>
+                          {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+              </div>
+          {% endif %}
+        {% endif %}
+
+    {% endfor %}
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- modal for app install confirm -->
+<div class="modal fade" id="confirm-app">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you would like to choose {{app.name}} to complete this task?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary confirm-install">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "store/base.html" %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="/static/store/js/raphael.js"></script>
+<script type="text/javascript" src="/static/store/js/treemap.js"></script>
+
+<script type="text/javascript">
+var boxFormatter = function (coordinates, index) {
+        	// so in this case an index of [1,1] would refer to "London" and [2,1] to "Berlin"
+        	// coordinates are in the form [x1,y1,x2,y2]
+
+            var cats = ["social","consent","access","notice"]
+            //max_scores = {'social':10,'consent':19,'access':9,'notice':16}
+
+
+
+            color = "hsb(" + 127 + ",0.85, 0.78)";
+
+            return{ "fill" : color,'stroke' : '#eee', 'stroke-width' : '3.5px'};
+        };
+
+var drawing;
+var cats = ["social","consent","access","notice"];
+
+  $(document).ready(function() {
+    data = {{ concerns|safe }}
+    //data = [5,10,12,1]
+    labels = ["S","C","A","N"]
+
+    Treemap.draw("privacy-matrix",300,300,data,labels,
+    { 'background' : {'fill': '#1a1a1a','stroke':'#1a1a1a'},
+      'label' : {'fill' : '#eee'},
+      'box'   : {'fill' : '#0094c3', 'stroke' : '#1a1a1a', 'stroke-width' : '12px'}})
+
+  });
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-xl-4">
+    <div id="privacy-matrix" class="big-matrix">
+    </div>
+  </div>
+
+  <div class="col-8">
+    <div class="card card-inverse card-success mb-3 text-center">
+      <div class="card-block">
+        <h1 class="card-title">This is your SCAN label</h1>
+      </div>
+    </div>
+
+    <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <p>Thank you for your responses. Based on these, we have generated a <strong>SCAN</strong> label, with the size of each box indicating which of the following privacy concerns matter to you the most:
+        <ul>
+          <li><b>Social</b>: Can you control how information is shared with your friends?</li>
+          <li><b>Consent</b>: Are you asked for permission before your data are used?</li>
+          <li><b>Access</b>: Are you able to access and export your own data?</li>
+          <li><b>Notice</b>: Does this app tell you how your data are used before it is collected?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <p>In the Self-improvement App Store this label can help you choose apps which match your privacy concerns.</p>
+        <p>When browsing an individual app, the label changes colour to show how well that app respects each of the four privacy concerns, and you may be recommended apps which are better at respecting your concerns.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <a role="button" href="tasks" class="btn btn-lg btn-primary">Continue</a>
+  </div>
+
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+
+<h1>Participant consent</h1>
+<p>Before we begin, please complete this short consent form. You can take another look at the <a href="/store" target="_blank">participant 
+information</a> if you would like to check any of the details about how we conduct this study.</p>
+
+
+ <div class="form-group">
+    <div class="form-check">
+        <label class="form-check-label">
+            <input class="form-check-input form-control-lg" name="consent-info" type="checkbox" value="">
+            I confirm I have read and understand the information page for this study.
+            I have had the opportunity to consider the information, ask questions and have had these answered satisfactorily.
+        </label>
+    </div>
+
+    <div class="form-check">
+        <label class="form-check-label">
+            <input class="form-check-input form-control-lg" name="consent-volun" type="checkbox" value="">
+            I understand that my participation is voluntary and that I am free
+            to withdraw at any time without giving any reason. I understand that
+            if I withdraw after the study period it may not be possible to
+            delete my anonymised data if it has already been analysed for
+            publication.
+        </label>
+    </div>
+
+    <div class="form-check">
+        <label class="form-check-label">
+            <input class="form-check-input form-control-lg" name="consent-info" type="checkbox" value="">
+            <b>I agree to take part in this study.</b>
+        </label>
+    </div>
+
+<div>
+
+<a class="btn btn-primary disabled" href="profiler" role="button">Continue</a>
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+    $("input").click(function() {
+        if($("input:checked").length == 3)
+            $(".btn").removeClass("disabled")
+        else
+            $(".btn").addClass("disabled");
+
+    })
+</script>
+
+{% endblock %}

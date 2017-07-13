@@ -1,0 +1,37 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+
+<div class="jumbotron jumbo-info">
+<p class="lead">
+Thank you. Based on your responses we have characterised what matters to you in the following way. Please feel free to explore this profile before continuing.
+</p>
+</div>
+
+<div class="row">
+
+<div class="col">
+  <p>Contextual profile description here</p>
+</div>
+
+<div class="col">
+  <div style="width: 300px; height: 300px;">
+    <canvas id="profileResult" width="50" height="50"></canvas>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<div data-ranks="{{ranks}}"></div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+  var ranks = JSON.parse(
+    document.querySelectorAll('[data-ranks]')[0].getAttribute('data-ranks'));
+  buildChart(ranks);
+});
+</script>
+
+{% endblock %}

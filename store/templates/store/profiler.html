@@ -1,0 +1,90 @@
+{% extends "store/base.html" %}
+
+{% block scripts %}
+<script type="text/javascript">
+// profiler
+$(".card").click(function() {
+  qid = $(this).data("qid");
+  $(".q_block").addClass("swing-out-top-bck");
+
+  var other;
+  if(qid == $($(".q_block")[0]).data("qid"))
+    other = $($(".q_block")[1]).data("qid")
+  else {
+    other = $($(".q_block")[0]).data("qid");
+  }
+
+  $.ajax({
+    url:"nextp",
+    dataType:"json",
+    data:{"response":qid,
+          "reject":other}
+  })
+  .done(function(data) {
+    if('status' in data) {
+      window.location.replace("doneProfiler")
+    }
+    app1 = data['0']
+    app2 = data['1']
+
+    $(".q_progress p").text(data['perc']+"% COMPLETE");
+    $(".progress-bar").css("width",data['perc']+'%')
+    $(".progess-bar").attr("aria-valuenow",data['perc'])
+
+
+    var card = $(".q_block")[0]
+    $(card).data("qid",app1['id'])
+    $(card).find(".card-text").text(app1['q'])
+    $(card).removeClass("swing-out-top-bck")
+    $(card).addClass("swing-in-top-fwd")
+
+    var card = $(".q_block")[1]
+    $(card).data("qid",app2['id'])
+    $(card).find(".card-text").text(app2['q'])
+    $(card).removeClass("swing-out-top-bck")
+    $(card).addClass("swing-in-top-fwd")
+
+  })
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col">
+<div class="jumbotron jumbo-info">
+<p class="lead">Please select which of these two statements you personally consider to be the most important.</b></p>
+</div>
+  </div>
+
+<div class="col-2">
+  <div class="card q_progress">
+    <div class="card-block">
+
+      <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar" style="width: {{apps.progress}}%" aria-valuenow="{{apps.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+  </div>
+  </div>
+</div>
+</div>
+
+<div class="row hover-cards">
+  <div class="card q_block" data-qid="{{apps.0.id}}">
+    <div class="card-block">
+       <p class="card-text"> {{apps.0.q}} </p>
+    </div>
+  </div>
+</div>
+
+<div class="row hover-cards">
+  <div class="card q_block" data-qid="{{apps.1.id}}">
+    <div class="card-block">
+       <p class="card-text"> {{apps.1.q}} </p>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

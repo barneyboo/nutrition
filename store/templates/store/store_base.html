@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Self-improvement app store</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/store/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/static/store/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="/static/store/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-toggleable-md navbar-dark bg-primary">
+      <div class="container">
+          <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button> -->
+          <a class="navbar-brand" href="/store/storeHome">
+              <strong>Self-improvement app store</strong>
+          </a>
+          <!-- <div class="collapse navbar-collapse" id="navbarNav1">
+
+              <form class="form-inline waves-effect waves-light">
+                  <input class="form-control" type="text" placeholder="Search for apps">
+              </form>
+          </div> -->
+      </div>
+  </nav>
+
+<div class="container-fluid">
+<div class="row">
+        {% if do_install %}
+            <div class="col-md-2 col-sm-4 sidebar1 navbar-light">
+              <button type="button" class="navbar-toggler-right hidden-md-up" data-toggle="collapse" data-target=".left-navigation" aria-expanded="false" aria-controls="collapseExample"><span class="navbar-toggler-icon"></span></button>
+                <br>
+                <div class="left-navigation">
+                    <ul class="list">
+                      <h5><strong>Categories</strong></h5>
+                      {% for cat in cats %}
+                      <li><a href="category?cat={{cat.id}}">{{ cat.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+
+                    <ul class="list">
+                      <h5><strong>Help</strong></h5>
+                      <li><a href="/store" target="_blank">Read the participant information again</a></li>
+                      <li><a href="mailto:luke.hutton@open.ac.uk">Contact the researcher</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        {% endif %}
+            <div class="col-md-10 col-sm-8 main-content">
+            {% if do_install %}
+              <blockquote class="blockquote bq-success">
+                  <p class="bq-title">Task reminder</p>
+                  <p>You are looking for an app to help you <b>{{ task }}</b>.</p>
+              </blockquote>
+            {% endif %}
+              {% block content %}
+              {% endblock %}
+            </div>
+</div>
+</div>
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="/static/store/js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/static/store/js/tether.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/static/store/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/static/store/js/mdb.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+    <script type="text/javascript" src="/static/store/js/store.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

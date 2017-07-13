@@ -1,0 +1,377 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <h3 class="card-header">Your task</h3>
+                <div class="card-block"> You were looking for an app to help you <b>{{ task }}</b>.
+                </div>
+            </div>
+        </div>
+
+           <div class="col-6">
+            <div class="card">
+                <h3 class="card-header">You chose</h3>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-2">
+                                <div class="suggest-placeholder"><a href="/store/app?id={{app.id}}&amp;ro=1" target="_blank"><img class="img-fluid" src="{{ app.icon_url }}"></a></div>
+                        </div>
+                        <div class="col">
+                                <h4 class="align-middle"><a href="/store/app?id={{app.id}}&amp;ro=1" target="_blank">{{ app.name }}</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="q-dest">
+
+    </div>
+
+
+     <div class="row q-src question-block q-label">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Which of these would you say best describes you?</h4>
+
+                    <form class="f-thoughtmatter">
+                        <div class="form-group">
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="label-nouse" type="radio" value="">
+                                    I never use technology to track my lifestyle.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="label-diduse" type="radio" value="">
+                                    I have used self-tracking technologies in the past, but no longer do.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="label-useapps" type="radio" value="">
+                                   I currently use mobile apps to track myself.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="label-usehw" type="radio" value="">
+                                    I currently use dedicated hardware, such as a fitness tracker or smartwatch
+                                    to track myself.
+                                </label>
+                            </div>                
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row q-src question-block q-altapp">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
+                    <div class="alt-widget">
+
+                    </div>
+
+                    <h4 class="card-title">We suggested <span class="altapp-appname"><a href="/store/app?id=1&amp;ro=1" target="_blank">no alt app</a></span> which was better at <span class="altapp-slug">no dimension chosen</span>.<br>
+                    Why did you decide to choose {{ app.name }} anyway?</h4>
+
+                    <form class="f-thoughtmatter">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-nolook" type="checkbox" value="">
+                                    I didn't look at this app when making my decision.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-nolike" type="checkbox" value="">
+                                    This app didn't look as useful as {{ app.name }}.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-notimportant" type="checkbox" value="">
+                                    Being able to do this isn't important to me.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-trustbrand" type="checkbox" value="">
+                                    I trust the {{ app.name }} brand more.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-usebefore" type="checkbox" value="">
+                                    I already use {{ app.name }}, or have used it before.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-usebefore" type="checkbox" value="">
+                                    I have had a bad experience with this alternative before.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="altapp-knowuse" type="checkbox" value="">
+                                    I know people who use {{ app.name }}.
+                                </label>
+                            </div>
+
+                                <div class="md-form">
+                                    <input type="text" name="altapp-other" id="tother" class="form-control">
+                                    <label for="altother" class="">If you have any other reasons, please let us know here.</label>
+                                </div>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row q-src question-block q-wrongcat">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">You chose {{ app.name }} from the {{ app.category.name }} category. Please briefly explain why
+                        you found this app preferable to alternatives in the <span class="right_cat"></span> category.
+                    </h4>
+
+                    <form class="f-thoughtmatter">
+                        <div class="form-group">
+                            <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" name="wrongcat-bestcat" type="checkbox" value="">
+                                    I didn't see a better app in another category.
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="wrongcat-onlyloo" type="checkbox" value="">
+                                    I only looked at the {{ app.category.name }} category.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="wrongcat-hardtask" type="checkbox" value="">
+                                    I wasn't sure how to complete the task I was given.
+                                </label>
+                            </div>
+
+                                <div class="md-form">
+                                    <input type="text" name="wrongcat-other" id="wother" class="form-control">
+                                    <label for="wrongcat-other" class="">If you have any other reasons, please let us know here.</label>
+                                </div>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row q-src question-block q-thoughtmatter">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">We believed that an app which is good at <span class="thoughtexpand-slug">no dimension chosen</span>
+                    was important to you, but this app has some issues in this respect. <br>
+                    Why did you choose this app anyway? Please select all which apply.</h4>
+                    <form class="f-thoughtmatter">
+                        <div class="form-group">
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-notimportant" type="checkbox" value="">
+                                    Whether an app is good at this isn't important to me.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-trustbrand" type="checkbox" value="">
+                                    I trust this brand.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-usebefore" type="checkbox" value="">
+                                    I already use this app, or have used it before.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-knowuse" type="checkbox" value="">
+                                    I know people who use this app.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-giveup" type="checkbox" value="">
+                                    I was willing to give up being able to do this to use this app.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-noalt" type="checkbox" value="">
+                                    I didn't see any alternatives that would let me do this better.
+                                </label>
+                            </div>
+
+                             <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" name="thought-nolikealt" type="checkbox" value="">
+                                    I didn't like any alternative apps more than this one.
+                                </label>
+                            </div>
+
+                                <div class="md-form">
+                                    <input type="text" name="thought-other" id="tother" class="form-control">
+                                    <label for="tother" class="">If you have any other reasons, please let us know here.</label>
+                                </div>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row q-src question-block q-whypick">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">In your own words, why did you choose {{app.name }}?</h4>
+                    <form class="f-whypick">
+                        <div class="form-group">
+                            <textarea class="form-control" id="whychoose-text" name="whychoose-text" rows="5"></textarea>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    var questions = {{ questions|safe }};
+
+    var responses = {'questions':questions};
+    
+    // map question types to classnames
+    var class_map = {'WHY_PICK':'q-whypick',
+                    'WRONG_CAT':'q-wrongcat',
+                    'THOUGHT_MATTER':'q-thoughtmatter',
+                    'ALT_APP':'q-altapp',
+                    'QS_EXP':'q-label'}
+
+    var concern_map = {'social':"giving you control over your social network privacy",
+                    'consent':"getting your consent",
+                    'access':'giving you access to your data',
+                    'notice':'explaining how your data are used'}
+
+    var q_idx = 0; // increment after each submit to render next question
+
+    $(document).on("submit","form",function() {
+       event.preventDefault();
+       responses[q_idx] = $(this).serializeArray();
+       q_idx++;
+
+       $(".question-block")[0].remove();
+
+       if((q_idx+1) > questions.length) {
+           //document.location.replace("/store/saveResponses")
+           $.ajax({
+               url:'submitBrief',
+               data:{"responses":responses}
+           })
+           .done(function(data) {
+               window.location.replace("/store/saveResponses")
+           });
+           return;
+       }
+
+       else
+        renderNextQ();
+       
+    });
+
+
+
+    function renderNextQ() {
+        var q = questions[q_idx]
+        var cloned = $(".q-src."+class_map[q.type]).clone()
+        cloned.removeClass("q-src")
+        cloned.show();
+        $(".q-dest").append(cloned);
+
+        // handle question-specific render behaviours
+        if(q.type == 'ALT_APP') {
+            $(".q-dest .altapp-appname a").text(q.app_name);
+            $(".q-dest .altapp-appname a").attr("href","/store/app?id="+q.app_id+"&ro=1");
+
+            $(".q-dest .altapp-slug").text(concern_map[q.cat]);
+        }
+        else if(q.type == 'WRONG_CAT') {
+            $(".q-dest .right_cat").text("{{ right_cat }}")
+        }
+
+        else if(q.type == "THOUGHT_MATTER") {
+            $(".q-dest .thoughtexpand-slug").text(concern_map[q.dimension])
+        }
+    }
+
+    function shuffle(a) {
+        for (let i = a.length; i; i--) {
+            let j = Math.floor(Math.random() * i);
+            [a[i - 1], a[j]] = [a[j], a[i - 1]];
+        }
+    }
+
+    $(document).ready(function() {
+        $(".q-src").hide();
+        shuffle(questions);
+
+        renderNextQ();
+
+
+    })
+
+</script>
+
+{% endblock %}
+

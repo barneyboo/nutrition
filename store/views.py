@@ -83,6 +83,8 @@ def store_context(request):
     Landing page for study, leading to information sheet and consent
 """
 def index(request):
+    if request.session.get('done',0) == 1:
+        return render(request, "store/done.html", {})
     return render(request, "store/info.html", {})
 
 """
@@ -527,7 +529,8 @@ def post_brief(request):
         if scan_props[scan] > 0.25:
             # this is an important concern! is this app scoring > 0.5?
             if(installed_scores['score_props'][scan] < 0.5):
-                questions.append({'type':'THOUGHT_MATTER','dimension':scan})
+                if installed_scores['max_scores'][scan] > 0:
+                  questions.append({'type':'THOUGHT_MATTER','dimension':scan})
             
 
     # third question: if an alternative was shown to user which improved on a dimension
@@ -537,7 +540,8 @@ def post_brief(request):
     for scan in scan_props:
         if scan_props[scan] > 0.25:
             for app in alt_apps['better'][scan]:
-                questions.append({'type':'ALT_APP','cat':scan,'app_id':app.id,'app_name':app.name})
+                if installed_scores['max_scores'][scan] > 0:
+                    questions.append({'type':'ALT_APP','cat':scan,'app_id':app.id,'app_name':app.name})
 
                 
 
@@ -594,6 +598,8 @@ def save_responses(request):
     p.page_nav_route = request.session['nav']
     
     p.save()
+
+    request.session['done'] = 1
     
 
     return render(request,"store/thanks.html")

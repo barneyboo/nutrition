@@ -595,6 +595,7 @@ def save_responses(request):
 
     p.time_end = datetime.datetime.now()
     p.debrief_questions = request.session['questions']
+    p.debrief_answers = request.GET.get("data")
     p.page_nav_route = request.session['nav']
     
     p.save()

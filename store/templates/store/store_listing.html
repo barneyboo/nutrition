@@ -181,6 +181,7 @@ $(document).ready(function () {
     </div>
 
 
+{% if participant.condition > 0 %}
   <div class="col-lg-4 privacy-sidebar">
     <div class="row matrix-cont">
       <div class="col-3">
@@ -197,6 +198,7 @@ $(document).ready(function () {
       </div>
     </div>
 
+    {% if participant.condition > 1 %}
     {% for concern in sorted_rank %}
         {% if concern.0 == "social" %}
             {% if better.social|length > 0 %}
@@ -383,11 +385,13 @@ $(document).ready(function () {
         {% endif %}
 
     {% endfor %}
+    {% endif %}
 
 
     </div>
   </div>
 </div>
+{% endif %}
 
 
 

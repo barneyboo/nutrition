@@ -835,6 +835,8 @@ def app_listing(request):
     app_scores = alt_dict['app_scores']
     max_scores = alt_dict['max_scores']
 
+    p_id = request.session.get("p_id")
+    p = Participant.objects.get(id=p_id)
 
     # rank the user's concerns so they are sorted in the sidebar visualisation
     # ranked_concerns = []
@@ -847,4 +849,4 @@ def app_listing(request):
     'max_scores':json.dumps(max_scores), 'better': better_cats, 'worse': worse_cats,
         # 'max_diff_better':max_diff_better,'max_diff_better_app':max_diff_better_app,
         # 'max_diff_worse':max_diff_worse,'max_diff_worse_app':max_diff_worse_app,
-    'story':story,'sorted_rank':sorted_rank})
+    'story':story,'sorted_rank':sorted_rank, 'participant': p})

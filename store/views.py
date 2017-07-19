@@ -572,7 +572,8 @@ def submit_brief(request):
     p_id = request.session.get("p_id")
     p = Participant.objects.get(id=p_id)
 
-    p.debrief_answers = request.GET.get("responses")
+    print request.POST
+    p.debrief_answers = request.POST
     p.save()
     return HttpResponse("saved")
 
@@ -595,7 +596,6 @@ def save_responses(request):
 
     p.time_end = datetime.datetime.now()
     p.debrief_questions = request.session['questions']
-    p.debrief_answers = request.GET.get("responses")
     p.page_nav_route = request.session['nav']
     
     p.save()

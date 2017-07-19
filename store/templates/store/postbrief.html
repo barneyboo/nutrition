@@ -282,12 +282,18 @@
     </div>
 
 
+    {% csrf_token %}
+
+
 
 
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+
     var questions = {{ questions|safe }};
 
     var responses = {'questions':questions};
@@ -317,6 +323,8 @@
            //document.location.replace("/store/saveResponses")
            $.ajax({
                url:'submitBrief',
+               method:'POST',
+               headers:{'X-CSRFToken':csrftoken},
                data:{"responses":responses}
            })
            .done(function(data) {

@@ -1,6 +1,7 @@
 {% extends "store/base.html" %}
 
 {% block scripts %}
+<script type="text/javascript" src="/static/store/js/spin.js"></script>
 <script type="text/javascript">
 // profiler
 $(".card").click(function() {
@@ -14,6 +15,11 @@ $(".card").click(function() {
     other = $($(".q_block")[0]).data("qid");
   }
 
+  var timeout = setTimeout(function() {
+    spinner.spin();
+    $("#spinner").slideDown();
+  },100)
+  
   $.ajax({
     url:"nextp",
     dataType:"json",
@@ -21,6 +27,10 @@ $(".card").click(function() {
           "reject":other}
   })
   .done(function(data) {
+    clearTimeout(timeout);
+    spinner.stop();
+    $("#spinner").slideUp();
+
     if('status' in data) {
       window.location.replace("doneProfiler")
     }
@@ -46,6 +56,34 @@ $(".card").click(function() {
 
   })
 });
+
+var opts = {
+  lines: 13 // The number of lines to draw
+, length: 28 // The length of each line
+, width: 14 // The line thickness
+, radius: 42 // The radius of the inner circle
+, scale: 1 // Scales overall size of the spinner
+, corners: 1 // Corner roundness (0..1)
+, color: '#000' // #rgb or #rrggbb or array of colors
+, opacity: 0.25 // Opacity of the lines
+, rotate: 0 // The rotation offset
+, direction: 1 // 1: clockwise, -1: counterclockwise
+, speed: 1 // Rounds per second
+, trail: 60 // Afterglow percentage
+, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+, zIndex: 2e9 // The z-index (defaults to 2000000000)
+, className: 'spinner' // The CSS class to assign to the spinner
+, top: '50%' // Top position relative to parent
+, left: '50%' // Left position relative to parent
+, shadow: false // Whether to render a shadow
+, hwaccel: true // Whether to use hardware acceleration
+, position: 'absolute' // Element positioning
+}
+var target = document.getElementById('spinner')
+var spinner = new Spinner(opts).spin(target);
+spinner.stop();
+$("#spinner").slideUp();
+
 </script>
 {% endblock %}
 
@@ -69,6 +107,8 @@ $(".card").click(function() {
   </div>
 </div>
 </div>
+
+<div id="spinner"></div>
 
 <div class="row hover-cards">
   <div class="card q_block" data-qid="{{apps.0.id}}">

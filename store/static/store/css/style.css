@@ -305,3 +305,9 @@ h4.story_BEST, .better-perform {
 .question-block a:hover {
 	text-decoration: underline;
 }
+
+#spinner {
+	width: 100%;
+	height: 50px;
+	margin: 0 auto;
+}

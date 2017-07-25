@@ -548,6 +548,25 @@ def post_brief(request):
     # final question: for everyone: generic question about level of QS experience?
     questions.append({'type':'QS_EXP'})
 
+    # filter out questions based on condition
+    p_id = request.session.get("p_id")
+    p = Participant.objects.get(id=p_id)
+    condition = p.condition
+
+    to_remove = []
+    for q in questions:
+        if condition == 0:
+            if q['type'] in ['ALT_APP','THOUGHT_MATTER']:
+                to_remove.append(q)
+        elif condition == 1:
+            if q['type'] = 'ALT_APP':
+                to_remove.append(q)
+
+    for q to_remove:
+        del questions[q]
+
+
+
     request.session['questions'] = questions
 
     return render(request,"store/postbrief.html",{'app':installed,'questions':json.dumps(questions),
@@ -834,6 +853,8 @@ def app_listing(request):
     worse_cats= alt_dict['worse']
     app_scores = alt_dict['app_scores']
     max_scores = alt_dict['max_scores']
+
+    
 
     p_id = request.session.get("p_id")
     p = Participant.objects.get(id=p_id)

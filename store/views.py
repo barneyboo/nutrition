@@ -43,7 +43,8 @@ questions = ["I should be told who is collecting data about me before it happens
         "I want to explicitly confirm if I am happy for something to be shared with sites such as Facebook, and to easily be able to delete it if I change my mind.",
         "When I'm deciding to share something with sites such as Facebook, I want to clearly see what I'm sharing and who will be able to see it.",
         "I don't want to be distracted by irrelevant information when I'm deciding what information to share with sites such as Facebook, or with whom I want to share it.",
-        "When I share something with sites such as Facebook, I expect the shared activity to match the way it was shown to me in the app first.",
+        #"When I share something with sites such as Facebook, I expect the shared activity to match the way it was shown to me in the app first.",
+        "When I share something with sites such as Facebook, I expect it to look the same way it did in the app first."
         "When I share something with sites such as Facebook, I expect to be able to get help to choose the right privacy settings."
 ]
 

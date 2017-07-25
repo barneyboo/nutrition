@@ -563,7 +563,7 @@ def post_brief(request):
                 to_remove.append(q)
 
     for q in to_remove:
-        del questions[q]
+        del questions[questions.index(q)]
 
 
 

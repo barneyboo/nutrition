@@ -559,10 +559,10 @@ def post_brief(request):
             if q['type'] in ['ALT_APP','THOUGHT_MATTER']:
                 to_remove.append(q)
         elif condition == 1:
-            if q['type'] = 'ALT_APP':
+            if q['type'] == 'ALT_APP':
                 to_remove.append(q)
 
-    for q to_remove:
+    for q in to_remove:
         del questions[q]
 
 

@@ -10,7 +10,7 @@ from jsonfield import JSONField
 class Participant(models.Model):
     task = models.SmallIntegerField()
     condition = models.SmallIntegerField() # 0: control, 1: generic, 2: personalised
-    time_start = models.DateTimeField(auto_now_add=True)
+    time_start = models.DateTimeField( =True)
     time_end = models.DateTimeField(null=True)
     profiler_answers = JSONField()
     page_nav_route = JSONField()

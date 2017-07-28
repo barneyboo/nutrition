@@ -324,7 +324,7 @@ def post_task(request):
     participant = Participant()
     participant.task = task
     participant.condition = random.randint(0,2)
-    participant.profiler_answers = request.session.get("rank_cats")
+    participant.profiler_answers = request.session.get("ranks")
     participant.save()
 
     request.session["p_id"] = participant.id

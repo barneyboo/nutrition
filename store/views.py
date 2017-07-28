@@ -120,36 +120,42 @@ def next_profile(request):
             ranks[str(i)] = 0
 
     ranks[answer] += 1
-    #ranks[other] -= 1
+    if ranks[other] > 0:
+        ranks[other] -= 1
     request.session["ranks"] = ranks
 
     ###
-    ### STRATEGY: repeat until all heuristic groups disambiguated
+    ### STRATEGY: repeat until all heuristic groups disambiguated and > 0
 
     # aggregate the four groups
-    # totals = {'notice':0,'consent':0,'access':0,'social':0}
-    # for rank in ranks:
-    #     for cat in h_cats:
-    #         if int(rank) < cat:
-    #             this_cat = h_cats[cat]
-    #             totals[this_cat] += ranks[rank]
-    #             break
-    #
-    # print ranks
-    # print totals
-    #
-    # seen = []
-    # ask_again = False
-    # for cat in totals:
-    #     if(totals[cat] in seen):
-    #         ask_again = True
-    #         break
-    #     seen.append(totals[cat])
-    #
-    # zeros = 0
-    # for rank in ranks:
-    #     if ranks[rank] == 0:
-    #         zeros+=1
+    totals = {'notice':0,'consent':0,'access':0,'social':0}
+    for rank in ranks:
+        for cat in h_cats:
+            if int(rank) < cat:
+                this_cat = h_cats[cat]
+                totals[this_cat] += ranks[rank]
+                break
+    
+    print ranks
+    print totals
+    
+    seen = []
+    ask_again = False
+    for cat in totals:
+        if(totals[cat] in seen or totals[cat] == 0):
+            ask_again = True
+            break
+        seen.append(totals[cat])
+
+    while True:
+        app1 = random.choice(questions)
+        app2 = random.choice(questions)
+
+        if app1 != app2:
+            break
+        
+    src_idx, other_idx = None, None
+    
 
 
 
@@ -157,34 +163,34 @@ def next_profile(request):
     ### STRATEGY: repeat until all terms disambiguated
     ###
 
-    seen = []
-    zeros = 0
-    have_dupes = False
+    # seen = []
+    # zeros = 0
+    # have_dupes = False
 
-    print ranks
+    # print ranks
 
-    for rank in ranks:
-        if ranks[rank] in seen:
-            have_dupes = True
-            zeros +=1
-            src_idx, other_idx = None, None
-            #break
-        else:
-            seen.append(ranks[rank])
-    if have_dupes:
-        while True:
-            poss_dupes = []
-            # keep trying to find a dupe pair
-            src_idx = random.randint(0,25)
-            for rank in ranks:
-                if ranks[str(rank)] == ranks[str(src_idx)] and int(rank) != src_idx:
-                    poss_dupes.append(rank)
-            if len(poss_dupes) > 0:
-                other_idx = int(random.choice(poss_dupes))
-                break
+    # for rank in ranks:
+    #     if ranks[rank] in seen:
+    #         have_dupes = True
+    #         zeros +=1
+    #         src_idx, other_idx = None, None
+    #         #break
+    #     else:
+    #         seen.append(ranks[rank])
+    # if have_dupes:
+    #     while True:
+    #         poss_dupes = []
+    #         # keep trying to find a dupe pair
+    #         src_idx = random.randint(0,25)
+    #         for rank in ranks:
+    #             if ranks[str(rank)] == ranks[str(src_idx)] and int(rank) != src_idx:
+    #                 poss_dupes.append(rank)
+    #         if len(poss_dupes) > 0:
+    #             other_idx = int(random.choice(poss_dupes))
+    #             break
 
-    if len(seen) < 26:
-        ask_again = True
+    # if len(seen) < 26:
+    #     ask_again = True
 
     ###
     ### STRATEGY: repeat until no zero terms
@@ -212,19 +218,20 @@ def next_profile(request):
         app1 = questions[src_idx]
         app2 = questions[other_idx]
 
-    zeros = 0
-    ask_again = False
-    for rank in ranks:
-        if ranks[rank] == 0:
-            ask_again = True
-            zeros+=1
-    if zeros == 1:
-        ask_again = False
+    # zeros = 0
+    # #ask_again = False # only use if disambiguating all terms
+    # for rank in ranks:
+    #     if ranks[rank] == 0:
+    #         #ask_again = True # only use if disambiguating all terms
+    #         zeros+=1
+    # if zeros == 1:
+    #     #ask_again = False # only use if disambiguating all terms
 
     if not ask_again:
         return JsonResponse({'status':'done'})
 
-    perc = ((26-float(zeros))/26)*100
+    #perc = ((26-float(zeros))/26)*100
+    perc = 0
 
     apps = {'perc':perc,'0':{'id':questions.index(app1),'q':app1}, '1':{'id':questions.index(app2),'q':app2}}
     return JsonResponse(apps)

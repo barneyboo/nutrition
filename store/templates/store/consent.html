@@ -27,6 +27,13 @@ information</a> if you would like to check any of the details about how we condu
         </label>
     </div>
 
+        <div class="form-check">
+         <div class="md-form">
+            <input type="text" name="consent-mail" id="consent-mail" class="form-control">
+            <label for="wrongcat-other" class="">(Optional) If you are a UK resident and would like to enter a prize draw to win a £10 Love2shop voucher, please enter a valid email address. </label>
+        </div>
+    </div>
+
     <div class="form-check">
         <label class="form-check-label">
             <input class="form-check-input form-control-lg" name="consent-info" type="checkbox" value="">
@@ -36,12 +43,22 @@ information</a> if you would like to check any of the details about how we condu
 
 <div>
 
-<a class="btn btn-primary disabled" href="profiler" role="button">Continue</a>
+<a class="btn btn-primary disabled" href="#" role="button">Continue</a>
 {% endblock %}
 
 {% block scripts %}
 
 <script type="text/javascript">
+
+    $(".btn").click(function() {
+        if($(this).hasClass("disabled"))
+            return;
+        if($("#consent-mail").val().length > 0) {
+            window.location.replace("profiler?mail=" + encodeURIComponent($("#consent-mail").val()))
+        }
+        else
+            window.location.replace("profiler");       
+    })
 
     $("input").click(function() {
         if($("input:checked").length == 3)

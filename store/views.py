@@ -246,7 +246,8 @@ def profiler(request):
     # get the next question or mark the questionnaire as finished for redirection
     # view handles all validation logic, js is just presentation layer
 
-
+    email = request.GET.get("mail","")
+    request.session['mail'] = email
     while True:
         app1 = random.choice(questions)
         app2 = random.choice(questions)
@@ -325,6 +326,7 @@ def post_task(request):
     participant.task = task
     participant.condition = random.randint(0,2)
     participant.profiler_answers = request.session.get("ranks")
+    participant.email = request.session.get('mail')
     participant.save()
 
     request.session["p_id"] = participant.id

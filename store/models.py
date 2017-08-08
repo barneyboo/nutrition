@@ -16,6 +16,7 @@ class Participant(models.Model):
     page_nav_route = JSONField()
     debrief_questions = JSONField()
     debrief_answers = JSONField()
+    email = models.EmailField(null=True)
 
 
 class Category(models.Model):
